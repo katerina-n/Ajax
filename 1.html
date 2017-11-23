@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>js</title>
+</head>
+<body>
+<script>
+    var url='https://api.nytimes.com/svc/semantic/v2/geocodes/query.json?api-key=8bb818da93184585a22c25fb1ee53779';
+    var xhttp=new XMLHttpRequest();
+    xhttp.onreadystatechange=function(){
+        if(this.readyState==4 && this.status==200){
+            var data=JSON.parse(xhttp.responseText).result;
+            var pasts=data.map(mapToPost);
+            document.body.innerHTML=getPostsTemplate(pasts);
+        }
+    };
+   xhttp.open("GET", url, true);
+   xhttp.send();
+   function mapToPost(post){
+       return{
+           link:post.url,
+           img:post.media[0]?((post.media[0]["media-metadata"])[2]).url:null,
+           description: post.abstract,
+           title:post.title,
+           date:post.published_date
+       }
+   }
+    function getPostsTemplate(posts){
+       return posts.reduce(function(tmpl, post){
+           tmpl+=`<h2>${post.title}</h2>
+               <img src=${post.img}>
+               <p>${post.description}</p>
+           <p>${post.link}</p>
+           <p>${post.date}</p>
+
+           `;
+             return tmpl;
+       })
+    }
+    </script>
+</body>
+</html>

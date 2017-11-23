@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Запись на прием</title>
+</head>
+<body>
+    
+    <!-- 
+        Требования к форме:
+        * Все поля обязательны для заполнение 
+        * Поля предполагающий определенный формат (email, телефон) должны валидировать пользовательский ввод.
+        * Переделайте данную форму с использованием элементов и атрибуттов HTML5
+     -->
+
+    <header><h1>Запись на прием</h1></header>
+    <form>
+        <fieldset>
+            <legend>Личная информация </legend>
+            <p>
+                <label>
+                    Имя
+                    <input type="text" name="name" required/></label> <!-- required- obyazatel'nu dlia zapol -->
+            </p>
+            <p>
+                <label>
+                    Телефон
+                    <input type="tel" name="phone" pattern="[\+]\d{1}\d{1}\s[\(]\d{3}[\)]\s\d{3}[\-]\d{2}[\-]\d{2}" placeholder="+38 (063) 587-88-22" required /></label>  <!-- type tel=phone -->
+            </p>
+            <p>
+                <label>
+                    Адрес электронной почты
+            <input type="email" name="email" required/></label>
+            </p>
+            <p>
+                <label>
+                    Дата рождения
+                    <input type="text" name="dob" required>
+                </label>
+            </p>
+        </fieldset>
+        <fieldset>
+            <legend>Назначить прием</legend>
+            <p>
+                <!-- используйте detaillist -->
+                <label form="reason">Какова причина вашего визита? </label>
+                <input list="character">
+                <datalist id="character">
+                    <option value="Плановый осмотр"></option>
+                    <option value="Симптомы простуды или гpиnna"></option>
+                    <option>Анализ крови</option>
+                    <option>Послеоперационный осмотр</option>
+                </datalist>
+            </p>
+            <p>
+                <label>
+                    <!-- используйте range -->
+                    Степень болевых ощущений
+                    <input type="range" name="pain" title="0 - нет боли, 10 - боль нестерпима" min="0" max="10" step="1" value="5"required/></label>
+            </p>
+            <p>
+                <label>
+                    Предпочтительная дата
+                    <input type="datetime" name="date" required/></label>
+            </p>
+            <p>
+                <label>
+                    Предпочтительное время
+                    <input type="text" name="time" required/></label>
+            </p>
+        </fieldset>
+        <p>
+            <input type="submit" value="Отправить" >
+        </p>
+    </form>
+<footer>
+    <h2>ждем по адрессу г. Киев</h2>
+</footer>
+</body>
+</html>
